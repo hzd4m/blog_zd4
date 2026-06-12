@@ -2,6 +2,17 @@
 layout: default
 ---
 
-<h1><%= data.title %></h1>
+<article>
+  <header>
+    <h1><%= data.title %></h1>
+    <% if data.date %>
+      <time datetime="<%= data.date.strftime('%Y-%m-%d') %>" style="font-family: var(--font-mono); font-size: var(--step-small); color: var(--color-graphite);">
+        <%= data.date.strftime("%d de %B de %Y") %>
+      </time>
+    <% end %>
+  </header>
 
-<%= yield %>
+  <div class="post-body">
+    <%= yield %>
+  </div>
+</article>

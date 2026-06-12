@@ -1,84 +1,354 @@
+/* ============================================================================
+   Blog do Zd4 — Sistema visual
+   Playbook: fusão Editorial + Marca + Experiência (ver aulas_blog_zd4/design/)
+   Base: Source Serif 4 (leitura) · Space Grotesk (títulos/marca) · JetBrains Mono
+   Cor signature: Âmbar terminal #FF6B1A · Fundo: creme #FBF9F4
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   1. TOKENS — as variáveis de design. Mude AQUI pra ajustar o blog inteiro.
+   ---------------------------------------------------------------------------- */
 :root {
-  --body-background: #f2f2f2;
-  --body-color: #444;
-  --heading-color: black;
-  --action-color: #d64045;
+  /* Cores — base editorial calma */
+  --color-ink: #1a1a1a;          /* texto principal (tinta) */
+  --color-paper: #fbf9f4;        /* fundo (papel creme quente) */
+  --color-graphite: #5a5a52;     /* texto secundário, datas, legendas */
+  --color-rule: #e4e0d6;         /* linhas, bordas finas (hairline) */
+  --color-card: #ffffff;         /* fundo de cartões/conteúdo */
+
+  /* Cor signature — âmbar terminal, usada com DISCIPLINA (~5% da tela) */
+  --color-amber: #ff6b1a;
+  --color-amber-soft: #ff6b1a1a;  /* âmbar 10% — fundos sutis */
+
+  /* Semânticos (pro teu lado segurança: patch/breach) — uso futuro */
+  --color-patch: #2e9e6b;        /* verde — sucesso, "corrigido" */
+  --color-breach: #d4453b;       /* vermelho — alerta, "falha" */
+
+  /* Famílias tipográficas */
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-heading: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+  /* Escala tipográfica — Major Third (1.250), base 1.125rem */
+  --step--1: 0.9rem;
+  --step-0: 1.125rem;            /* corpo */
+  --step-1: 1.406rem;
+  --step-2: 1.758rem;
+  --step-3: 2.197rem;            /* h1 */
+  --step-small: 0.78rem;         /* legendas, metadados */
+
+  /* Ritmo e leitura */
+  --leading-body: 1.7;
+  --leading-heading: 1.15;
+  --measure: 68ch;              /* largura ideal de leitura */
+
+  /* Espaçamento (múltiplos de 0.5rem) */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+
+  /* Bordas e sombra */
+  --radius: 6px;
+  --shadow-lift: 0 8px 30px rgba(0, 0, 0, 0.07);
+
+  /* Movimento (micro-interações) */
+  --dur-fast: 180ms;
+  --dur-med: 280ms;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --num-oldstyle: oldstyle-nums proportional-nums;
 }
+
+/* ----------------------------------------------------------------------------
+   2. RESET mínimo
+   ---------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-  background: var(--body-background);
-  color: var(--body-color);
-  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    "Helvetica", "Arial", sans-serif;
-  margin: 0 8px;
-  font-size: 108%;
-  line-height: 1.5;
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: var(--leading-body);
+  font-feature-settings: "kern", "liga", "onum", "pnum"; /* old-style nums + ligaduras */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-a {
-  color: var(--action-color);
-  text-decoration: underline;
-  text-decoration-color: #ffb088;
-}
-
-h1 {
-  margin: 1rem 0 3rem;
-  text-align: center;
-  font-weight: 900;
-  font-size: 2.5rem;
-  color: var(--heading-color);
-  line-height: 1.2;
-}
-
+/* ----------------------------------------------------------------------------
+   3. MARCA — header com wordmark "zd4▮" e cursor âmbar piscando
+   ---------------------------------------------------------------------------- */
 body > header {
-  margin: 1rem;
-  text-align: center;
+  max-width: var(--measure);
+  margin: var(--space-lg) auto var(--space-sm);
+  padding: 0 var(--space-md);
 }
 
-body > header img {
-  display: inline-block;
-  width: 400px;
-  max-width: 100%;
+.marca {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--step-2);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+/* o cursor de bloco — assinatura da marca */
+.marca .cursor {
+  color: var(--color-amber);
+  margin-left: 0.05em;
+  animation: piscar 1.1s steps(1) infinite;
+}
+
+@keyframes piscar {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+/* ----------------------------------------------------------------------------
+   4. NAVEGAÇÃO
+   ---------------------------------------------------------------------------- */
+body > nav {
+  max-width: var(--measure);
+  margin: 0 auto var(--space-lg);
+  padding: var(--space-xs) var(--space-md) var(--space-md);
+  border-bottom: 1px solid var(--color-rule);
 }
 
 body > nav ul {
-  margin: 2rem 0;
+  margin: 0;
   padding: 0;
-  list-style-type: none;
+  list-style: none;
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  font-size: 1.3rem;
-  font-weight: bold;
+  gap: var(--space-md);
+  font-family: var(--font-heading);
+  font-size: var(--step--1);
+  font-weight: 500;
 }
 
 body > nav a {
+  color: var(--color-graphite);
   text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+  transition: color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
 }
 
-main {
-  margin: 2rem auto 4rem;
-  max-width: 65rem;
-  min-height: calc(100vh - 200px);
-  padding: 25px 25px 50px;
-  background: white;
-  box-shadow: 2px 3px 3px #ddd;
-  border-radius: 3px;
+body > nav a:hover {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-amber);
+}
 
-  @media (max-width: 500px) {
-    padding: 16px 16px 50px;
+/* ----------------------------------------------------------------------------
+   5. CONTEÚDO PRINCIPAL
+   ---------------------------------------------------------------------------- */
+main {
+  max-width: var(--measure);
+  margin: 0 auto var(--space-xl);
+  padding: 0 var(--space-md);
+  min-height: 50vh;
+}
+
+/* Títulos */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  line-height: var(--leading-heading);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+
+h1 {
+  font-size: var(--step-3);
+  font-weight: 700;
+  margin: var(--space-md) 0 var(--space-lg);
+}
+
+h2 {
+  font-size: var(--step-2);
+  font-weight: 600;
+  margin: var(--space-lg) 0 var(--space-sm);
+}
+
+h3 {
+  font-size: var(--step-1);
+  font-weight: 600;
+  margin: var(--space-lg) 0 var(--space-xs);
+}
+
+p { margin: 0 0 var(--space-md); }
+
+/* Links no corpo — sublinhado âmbar que "preenche" no hover */
+main a {
+  color: var(--color-ink);
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-amber), var(--color-amber));
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  padding-bottom: 1px;
+  transition: background-size var(--dur-med) var(--ease);
+}
+
+main a:hover {
+  background-size: 100% 100%;
+  color: var(--color-paper);
+}
+
+/* ----------------------------------------------------------------------------
+   6. ELEMENTO DE SURPRESA — drop cap no primeiro parágrafo do post
+   (aplicado via classe .post-body no layout de post)
+   ---------------------------------------------------------------------------- */
+.post-body > p:first-of-type::first-letter {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  float: left;
+  font-size: 3.6em;
+  line-height: 0.8;
+  padding: 0.08em 0.12em 0 0;
+  color: var(--color-amber);
+}
+
+/* Citações — barra âmbar lateral */
+blockquote {
+  margin: var(--space-md) 0;
+  padding: var(--space-xs) var(--space-md);
+  border-left: 3px solid var(--color-amber);
+  color: var(--color-graphite);
+  font-style: italic;
+}
+
+blockquote p:last-child { margin-bottom: 0; }
+
+/* Linha divisória sutil */
+hr {
+  border: none;
+  border-top: 1px solid var(--color-rule);
+  margin: var(--space-xl) 0;
+}
+
+/* Listas */
+ul, ol { padding-left: var(--space-md); }
+li { margin-bottom: var(--space-xs); }
+
+/* Tabelas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-md) 0;
+  font-size: var(--step--1);
+}
+th, td {
+  text-align: left;
+  padding: var(--space-xs) var(--space-sm);
+  border-bottom: 1px solid var(--color-rule);
+}
+th {
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+/* ----------------------------------------------------------------------------
+   7. CÓDIGO — inline e blocos
+   ---------------------------------------------------------------------------- */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--color-amber-soft);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  background: #1c1b19;            /* fundo escuro pro bloco (contraste com creme) */
+  color: #e8e6e1;
+  padding: var(--space-md);
+  border-radius: var(--radius);
+  overflow-x: auto;
+  margin: var(--space-md) 0;
+  border-left: 3px solid var(--color-amber);
+}
+
+pre code {
+  background: none;               /* anula o fundo do code inline dentro do pre */
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* ----------------------------------------------------------------------------
+   8. LISTA DE POSTS — cards com régua âmbar no hover (assinatura de marca)
+   Use a classe .lista-posts > .item-post nas páginas de listagem
+   ---------------------------------------------------------------------------- */
+.lista-posts { list-style: none; padding: 0; margin: 0; }
+
+.item-post {
+  padding: var(--space-md);
+  margin-bottom: var(--space-sm);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius);
+  transition: border-color var(--dur-med) var(--ease),
+              background var(--dur-med) var(--ease);
+}
+
+.item-post:hover {
+  border-left-color: var(--color-amber);
+  background: var(--color-card);
+}
+
+.item-post h2, .item-post h3 { margin: 0 0 var(--space-xs); }
+
+.item-post time {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--step-small);
+  color: var(--color-graphite);
+  margin-bottom: var(--space-xs);
+}
+
+/* ----------------------------------------------------------------------------
+   9. RODAPÉ
+   ---------------------------------------------------------------------------- */
+footer {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md) var(--space-xl);
+  border-top: 1px solid var(--color-rule);
+  font-size: var(--step-small);
+  font-family: var(--font-mono);
+  color: var(--color-graphite);
+}
+
+footer a {
+  color: var(--color-graphite);
+  text-decoration: underline;
+  text-decoration-color: var(--color-amber);
+}
+
+/* ----------------------------------------------------------------------------
+   10. ACESSIBILIDADE — respeita quem desativa animações
+   ---------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-footer {
-  text-align: center;
-  margin-bottom: 4rem;
-  font-size: 1em;
-}
-
-hr {
-  border: none;
-  border-top: 2px dotted #bbb;
-  margin: 3rem 0;
+/* ----------------------------------------------------------------------------
+   11. RESPONSIVO
+   ---------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  :root { --step-3: 1.9rem; --step-2: 1.5rem; }
+  body { font-size: 1.05rem; }
+  main, body > nav, body > header, footer { padding-left: var(--space-sm); padding-right: var(--space-sm); }
 }
