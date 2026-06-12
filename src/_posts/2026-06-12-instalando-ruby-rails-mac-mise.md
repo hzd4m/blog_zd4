@@ -1,4 +1,11 @@
----
+  ---
+  layout: post
+  title: "Instalando Ruby 3.3 e Rails 8 no Mac com mise"
+  date: 2026-06-12 10:00:00 -0300
+  categories: [rails, setup]
+  --- 
+
+  ---
 layout: post
 title: "Instalar Ruby 3.3 e Rails 8 no Mac com mise (2026)"
 date: 2026-06-12 10:00:00 -0300
