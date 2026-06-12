@@ -2,10 +2,10 @@
 layout: default
 ---
 
-<article class="livro" style="max-width: 700px; margin: 0 auto; padding: 2rem 1rem; font-family: Georgia, 'Times New Roman', serif; line-height: 1.7;">
+<article class="livro">
 
-  <header class="livro__capa" style="text-align: center; padding: 3rem 1rem; border: 1px solid #ddd; background: #fafafa; margin-bottom: 2rem;">
-    <pre style="font-family: monospace; line-height: 1.2; font-size: 0.85rem; color: #555; margin: 0 0 1.5rem;">
+  <header class="livro__capa">
+    <pre>
 +---------------------------+
 |                           |
 |       <%= data.title %>
@@ -14,11 +14,11 @@ layout: default
 |                           |
 +---------------------------+
     </pre>
-    <h1 style="margin: 0.5rem 0; font-size: 2rem;"><%= data.title %></h1>
-    <p style="margin: 0.25rem 0; color: #666;">por <strong><%= data.autor %></strong> &middot; <%= data.ano %></p>
+    <h1><%= data.title %></h1>
+    <p class="livro__autor">por <strong><%= data.autor %></strong> &middot; <%= data.ano %></p>
   </header>
 
-  <section class="livro__descricao" style="font-size: 1.1rem; margin-bottom: 2.5rem;">
+  <section class="livro__descricao">
     <p><em><%= data.descricao %></em></p>
     <%= yield %>
   </section>
@@ -29,35 +29,34 @@ layout: default
                           .sort_by { |c| c.data.ordem.to_i }
   %>
 
-  <section class="livro__sumario" style="margin: 2rem 0;">
-    <h2 style="border-bottom: 2px solid #333; padding-bottom: 0.4rem;">Sumário</h2>
+  <section class="livro__sumario">
+    <h2>Sumário</h2>
 
     <% if capitulos_do_livro.empty? %>
       <p><em>Nenhum capítulo publicado ainda.</em></p>
     <% else %>
-      <ol style="padding-left: 1.2rem;">
+      <ol>
         <% capitulos_do_livro.each do |cap| %>
-          <li style="margin: 0.6rem 0;">
-            <a href="<%= cap.relative_url %>" style="text-decoration: none; color: #0a4d8c;">
+          <li>
+            <a href="<%= cap.relative_url %>">
               <strong><%= cap.data.title %></strong>
             </a>
             <% if cap.data.tempo_leitura %>
-              <span style="color: #888; font-size: 0.9rem;">&middot; <%= cap.data.tempo_leitura %></span>
+              <span class="livro__tempo">&middot; <%= cap.data.tempo_leitura %></span>
             <% end %>
           </li>
         <% end %>
       </ol>
 
-      <div style="text-align: center; margin: 2.5rem 0 1rem;">
-        <a href="<%= capitulos_do_livro.first.relative_url %>"
-           style="display: inline-block; padding: 0.7rem 1.4rem; background: #0a4d8c; color: #fff; text-decoration: none; border-radius: 4px;">
+      <div class="livro__cta">
+        <a href="<%= capitulos_do_livro.first.relative_url %>">
           Começar pelo Cap. <%= capitulos_do_livro.first.data.ordem %> &rarr;
         </a>
       </div>
     <% end %>
   </section>
 
-  <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd; font-size: 0.9rem; color: #666;">
+  <footer class="livro__rodape">
     <p><a href="<%= relative_url '/livros/' %>">&larr; Todos os livros</a></p>
   </footer>
 </article>

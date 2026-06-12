@@ -16,22 +16,22 @@ layout: default
   proximo  = (indice_atual && indice_atual < capitulos_do_livro.length - 1) ? capitulos_do_livro[indice_atual + 1] : nil
 %>
 
-<article class="capitulo" style="max-width: 700px; margin: 0 auto; padding: 2rem 1rem; font-family: Georgia, 'Times New Roman', serif; line-height: 1.75; font-size: 1.05rem; color: #222;">
+<article class="capitulo">
 
-  <nav class="breadcrumb" style="font-size: 0.85rem; color: #777; margin-bottom: 1.5rem;">
-    <a href="<%= relative_url '/livros/' %>" style="color: #777;">Livros</a>
+  <nav class="breadcrumb">
+    <a href="<%= relative_url '/livros/' %>">Livros</a>
     &rsaquo;
     <% if livro %>
-      <a href="<%= livro.relative_url %>" style="color: #777;"><%= livro.data.title %></a>
+      <a href="<%= livro.relative_url %>"><%= livro.data.title %></a>
       &rsaquo;
     <% end %>
     <span>Cap. <%= data.ordem %></span>
   </nav>
 
-  <header style="margin-bottom: 2rem;">
-    <h1 style="margin: 0 0 0.5rem; font-size: 1.8rem; line-height: 1.3;"><%= data.title %></h1>
+  <header class="capitulo__cabecalho">
+    <h1><%= data.title %></h1>
     <% if data.tempo_leitura %>
-      <p style="color: #888; font-size: 0.9rem; margin: 0;">
+      <p class="capitulo__tempo">
         Tempo de leitura: <strong><%= data.tempo_leitura %></strong>
       </p>
     <% end %>
@@ -41,10 +41,10 @@ layout: default
     <%= yield %>
   </div>
 
-  <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #ddd;">
-    <nav class="capitulo__nav" style="display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
+  <footer class="capitulo__rodape">
+    <nav class="capitulo__nav">
       <% if anterior %>
-        <a href="<%= anterior.relative_url %>" style="text-decoration: none; color: #0a4d8c; max-width: 45%;">
+        <a href="<%= anterior.relative_url %>">
           &larr; <%= anterior.data.title %>
         </a>
       <% else %>
@@ -52,7 +52,7 @@ layout: default
       <% end %>
 
       <% if proximo %>
-        <a href="<%= proximo.relative_url %>" style="text-decoration: none; color: #0a4d8c; text-align: right; max-width: 45%;">
+        <a href="<%= proximo.relative_url %>" class="is-proximo">
           <%= proximo.data.title %> &rarr;
         </a>
       <% else %>
@@ -60,7 +60,7 @@ layout: default
       <% end %>
     </nav>
 
-    <p style="margin-top: 1.5rem; font-size: 0.9rem; color: #666;">
+    <p class="capitulo__voltar">
       <% if livro %>
         <a href="<%= livro.relative_url %>">&uarr; Voltar ao sumário de <%= livro.data.title %></a>
       <% else %>
@@ -69,35 +69,3 @@ layout: default
     </p>
   </footer>
 </article>
-
-<style>
-  .capitulo__conteudo h2 { margin-top: 2.5rem; padding-bottom: 0.3rem; border-bottom: 1px solid #eee; }
-  .capitulo__conteudo h3 { margin-top: 2rem; }
-  .capitulo__conteudo blockquote {
-    border-left: 4px solid #0a4d8c;
-    background: #f6f9fc;
-    margin: 1.5rem 0;
-    padding: 0.6rem 1rem;
-    color: #333;
-  }
-  .capitulo__conteudo code {
-    background: #f4f4f4;
-    padding: 0.1rem 0.35rem;
-    border-radius: 3px;
-    font-size: 0.95em;
-    font-family: 'SF Mono', Menlo, Consolas, monospace;
-  }
-  .capitulo__conteudo pre {
-    background: #f6f8fa;
-    border: 1px solid #e1e4e8;
-    border-radius: 4px;
-    padding: 1rem;
-    overflow-x: auto;
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-  .capitulo__conteudo pre code { background: transparent; padding: 0; }
-  .capitulo__conteudo img { max-width: 100%; height: auto; }
-  .capitulo__conteudo table { border-collapse: collapse; margin: 1rem 0; }
-  .capitulo__conteudo th, .capitulo__conteudo td { border: 1px solid #ddd; padding: 0.4rem 0.7rem; }
-</style>

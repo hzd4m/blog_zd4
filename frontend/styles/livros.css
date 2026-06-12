@@ -1,0 +1,281 @@
+/* ============================================================================
+   LIVROS — estilos dos layouts de livro/capítulo ("Por que Rails?")
+   Migrado dos antigos CSS inline em capitulo.erb / livro.erb para usar
+   o playbook (tokens de index.css). Foco: acessibilidade WCAG 2.2 AA/AAA.
+   ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+   Container do capítulo / livro
+   ---------------------------------------------------------------------------- */
+.capitulo,
+.livro {
+  /* main já centraliza em --measure; herda fonte/cor do body (playbook) */
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  line-height: var(--leading-body);
+}
+
+/* ----------------------------------------------------------------------------
+   Breadcrumb e metadados — --color-graphite sobre creme (>= 4.5:1)
+   ---------------------------------------------------------------------------- */
+.capitulo .breadcrumb {
+  font-family: var(--font-heading);
+  font-size: var(--step--1);
+  color: var(--color-graphite);
+  margin-bottom: var(--space-md);
+}
+
+.capitulo .breadcrumb a {
+  color: var(--color-graphite);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-rule);
+  transition: color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+
+.capitulo .breadcrumb a:hover {
+  color: var(--color-ink);
+  border-bottom-color: var(--color-amber);
+}
+
+.capitulo__meta,
+.capitulo__cabecalho {
+  margin-bottom: var(--space-lg);
+}
+
+.capitulo__tempo {
+  color: var(--color-graphite);
+  font-family: var(--font-mono);
+  font-size: var(--step-small);
+  margin: 0;
+}
+
+/* ----------------------------------------------------------------------------
+   Navegação anterior/próximo e rodapé do capítulo
+   ---------------------------------------------------------------------------- */
+.capitulo__rodape,
+.livro__rodape {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-rule);
+}
+
+.capitulo__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.capitulo__nav a {
+  color: var(--color-ink);
+  text-decoration: none;
+  max-width: 45%;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.capitulo__nav a:hover { border-bottom-color: var(--color-amber); }
+.capitulo__nav a.is-proximo { text-align: right; }
+
+.capitulo__voltar {
+  margin-top: var(--space-md);
+  font-size: var(--step--1);
+  color: var(--color-graphite);
+}
+
+.capitulo__voltar a { color: var(--color-graphite); }
+
+/* ----------------------------------------------------------------------------
+   Conteúdo do capítulo — títulos com régua sutil
+   ---------------------------------------------------------------------------- */
+.capitulo__conteudo h2 {
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+/* Citações: reaproveitam o blockquote do playbook (barra âmbar). */
+
+/* ----------------------------------------------------------------------------
+   CÓDIGO nos capítulos — alinhado ao playbook (fundo escuro, contraste AAA).
+   Cobre tanto <pre> simples quanto a saída do Rouge (pre.highlight / .highlight)
+   e sobrepõe o tema claro de syntax-highlighting.css dentro do livro.
+   ---------------------------------------------------------------------------- */
+.capitulo__conteudo pre,
+.capitulo__conteudo div.highlight,
+.capitulo__conteudo pre.highlight,
+.capitulo__conteudo .highlighter-rouge .highlight {
+  background: #1c1b19;
+  color: #e8e6e1;
+  border-radius: var(--radius);
+  border-left: 3px solid var(--color-amber);
+  overflow-x: auto;
+}
+
+.capitulo__conteudo pre,
+.capitulo__conteudo pre.highlight {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  line-height: 1.6;
+  padding: var(--space-md);
+  margin: var(--space-md) 0;
+}
+
+/* Quando o Rouge envolve em <div class="highlight"><pre class="highlight">,
+   a borda/padding ficam no div e o pre interno é transparente. */
+.capitulo__conteudo div.highlight > pre.highlight {
+  background: transparent;
+  border-left: none;
+  margin: 0;
+}
+
+.capitulo__conteudo pre code,
+.capitulo__conteudo pre.highlight code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* code inline: âmbar suave + tinta (mesmo do playbook) */
+.capitulo__conteudo code {
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--color-amber-soft);
+  color: var(--color-ink);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+/* ----------------------------------------------------------------------------
+   Tokens Rouge SOBRE FUNDO ESCURO (sobrepõe syntax-highlighting.css só
+   no contexto do livro). Paleta clara, todos >= 4.5:1 sobre #1c1b19.
+   ---------------------------------------------------------------------------- */
+.capitulo__conteudo .highlight .c,
+.capitulo__conteudo .highlight .cm,
+.capitulo__conteudo .highlight .c1,
+.capitulo__conteudo .highlight .cs,
+.capitulo__conteudo .highlight .cp,
+.capitulo__conteudo .highlight .go { color: #9b978c; font-style: italic; } /* comentários/saída */
+
+.capitulo__conteudo .highlight .k,
+.capitulo__conteudo .highlight .kc,
+.capitulo__conteudo .highlight .kd,
+.capitulo__conteudo .highlight .kn,
+.capitulo__conteudo .highlight .kp,
+.capitulo__conteudo .highlight .kr,
+.capitulo__conteudo .highlight .o,
+.capitulo__conteudo .highlight .ow { color: #ff9e64; font-weight: 600; } /* keywords/operadores — âmbar claro */
+
+.capitulo__conteudo .highlight .s,
+.capitulo__conteudo .highlight .s1,
+.capitulo__conteudo .highlight .s2,
+.capitulo__conteudo .highlight .sb,
+.capitulo__conteudo .highlight .sc,
+.capitulo__conteudo .highlight .sd,
+.capitulo__conteudo .highlight .se,
+.capitulo__conteudo .highlight .sh,
+.capitulo__conteudo .highlight .si,
+.capitulo__conteudo .highlight .sx,
+.capitulo__conteudo .highlight .sr,
+.capitulo__conteudo .highlight .ss { color: #9ece6a; } /* strings — verde claro */
+
+.capitulo__conteudo .highlight .m,
+.capitulo__conteudo .highlight .mf,
+.capitulo__conteudo .highlight .mh,
+.capitulo__conteudo .highlight .mi,
+.capitulo__conteudo .highlight .mo,
+.capitulo__conteudo .highlight .il { color: #7dcfff; } /* números — ciano claro */
+
+.capitulo__conteudo .highlight .nf,
+.capitulo__conteudo .highlight .nc,
+.capitulo__conteudo .highlight .nd,
+.capitulo__conteudo .highlight .ne,
+.capitulo__conteudo .highlight .nl,
+.capitulo__conteudo .highlight .nt { color: #7aa2f7; font-weight: 600; } /* funções/classes/tags — azul claro */
+
+.capitulo__conteudo .highlight .nb,
+.capitulo__conteudo .highlight .bp,
+.capitulo__conteudo .highlight .no,
+.capitulo__conteudo .highlight .nv,
+.capitulo__conteudo .highlight .vc,
+.capitulo__conteudo .highlight .vg,
+.capitulo__conteudo .highlight .vi,
+.capitulo__conteudo .highlight .na,
+.capitulo__conteudo .highlight .ni,
+.capitulo__conteudo .highlight .nn { color: #e0af68; } /* builtins/variáveis — areia claro */
+
+.capitulo__conteudo .highlight .gp { color: #9b978c; } /* prompt do shell */
+.capitulo__conteudo .highlight .gi { color: #9ece6a; background: transparent; } /* inserido */
+.capitulo__conteudo .highlight .gd { color: #f7768e; background: transparent; } /* removido */
+.capitulo__conteudo .highlight .err { color: #f7768e; background: transparent; }
+.capitulo__conteudo .highlight .w { color: inherit; }
+
+/* ----------------------------------------------------------------------------
+   Capa do livro e sumário
+   ---------------------------------------------------------------------------- */
+.livro__capa {
+  text-align: center;
+  padding: var(--space-lg) var(--space-md);
+  border: 1px solid var(--color-rule);
+  background: var(--color-card);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-lg);
+}
+
+.livro__capa pre {
+  font-family: var(--font-mono);
+  line-height: 1.2;
+  font-size: var(--step-small);
+  color: var(--color-graphite);
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 0 var(--space-md);
+  overflow-x: auto;
+}
+
+.livro__capa .livro__autor { color: var(--color-graphite); margin: var(--space-xs) 0; }
+
+.livro__descricao {
+  font-size: var(--step-0);
+  margin-bottom: var(--space-lg);
+}
+
+.livro__sumario { margin: var(--space-lg) 0; }
+.livro__sumario h2 {
+  border-bottom: 2px solid var(--color-ink);
+  padding-bottom: var(--space-xs);
+}
+.livro__sumario ol { padding-left: var(--space-md); }
+.livro__sumario li { margin: var(--space-xs) 0; }
+
+.livro__sumario a {
+  color: var(--color-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-rule);
+}
+.livro__sumario a:hover { border-bottom-color: var(--color-amber); }
+.livro__sumario .livro__tempo {
+  color: var(--color-graphite);
+  font-size: var(--step--1);
+  border: none;
+}
+
+/* CTA "Começar pelo Cap. X" — âmbar com tinta escura (contraste forte) */
+.livro__cta { text-align: center; margin: var(--space-lg) 0 var(--space-sm); }
+.livro__cta a {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-md);
+  background: var(--color-amber);
+  color: #1a1a1a;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius);
+}
+
+.livro__rodape { font-size: var(--step--1); color: var(--color-graphite); }
+.livro__rodape a { color: var(--color-graphite); }
