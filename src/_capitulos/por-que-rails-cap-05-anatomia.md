@@ -16,7 +16,7 @@ permalink: /livros/por-que-rails/cap-05-anatomia/
 
 > "There is no magic. There is only convention." — DHH (parafraseado)
 
-> ⏱️ **Tempo de leitura:** ~15 minutos (calculado em ~200 palavras/min)
+
 > 🎯 **Você vai sair daqui sabendo:**
 > - Por que abrir QUALQUER projeto Rails do mundo eu vou achar as coisas no mesmo lugar
 > - O que cada uma das ~25 pastas e arquivos que `rails new` cospe faz

@@ -16,7 +16,7 @@ permalink: /livros/por-que-rails/cap-06-activerecord/
 
 > "Dado bem modelado é metade do app." — provérbio de Rails dev
 
-> ⏱️ **Tempo de leitura:** ~19 minutos (calculado em ~200 palavras/min)
+
 > 🎯 **Você vai sair daqui sabendo:**
 > - Como `User.where(ativo: true).order(:nome).limit(10)` vira SQL sem você escrever uma linha de SQL
 > - Quando usar `belongs_to`, `has_many`, `has_many :through`, polimorfismo — e quando NÃO usar

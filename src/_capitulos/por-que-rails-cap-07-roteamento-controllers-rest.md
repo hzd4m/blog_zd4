@@ -16,7 +16,7 @@ permalink: /livros/por-que-rails/cap-07-roteamento-controllers-rest/
 
 > "Uma URL é uma promessa de comportamento." — adaptado de Roy Fielding
 
-> ⏱️ **Tempo de leitura:** ~32 minutos (calculado em ~200 palavras/min)
+
 > 🎯 **Você vai sair daqui sabendo:**
 > - Por que `resources :posts` é uma das linhas mais densas em significado do Rails inteiro
 > - Como uma requisição HTTP atravessa `routes.rb`, vira `params`, passa por filters e vira resposta — sem mistério
