@@ -46,8 +46,8 @@ Bridgetown.configure do |config|
   # If you're using esbuild for frontend assets, edit `esbuild.config.js` to
   # update `publicPath`.
   #
-  # GitHub Pages serve o site em hzd4m.github.io/blog_zd4 (project page).
-  base_path "/blog_zd4"
+  # GitHub Pages serve o site em hzd4m.github.io/blog (project page).
+  base_path "/blog"
 
   # You can also modify options on this configuration object directly, like so:
   #

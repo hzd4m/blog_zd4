@@ -33,8 +33,8 @@ import build from "./config/esbuild.defaults.js"
  * @type {BuildOptions}
  */
 const esbuildOptions = {
-  // Site servido em hzd4m.github.io/blog_zd4 — assets precisam do mesmo prefixo.
-  publicPath: "/blog_zd4/_bridgetown/static",
+  // Site servido em hzd4m.github.io/blog — assets precisam do mesmo prefixo.
+  publicPath: "/blog/_bridgetown/static",
   plugins: [
     // add new plugins here...
   ],
