@@ -37,4 +37,4 @@ Um ponto de venda **offline-first** feito em Flutter para a **Fazenda Boa Espera
 - **App do vendedor** — PDV com carrinho e checkout, além de controle de estoque.
 - **Offline-first** — opera sem rede e sincroniza os dados quando a conexão volta.
 
-As telas abaixo são da versão web do sistema.
+As telas abaixo são do app mobile, feito em Flutter.
