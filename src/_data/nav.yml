@@ -1,0 +1,30 @@
+# Navegação do blog (data-driven).
+# Acessível nos templates via `site.data.nav`.
+#
+# ── categorias ──────────────────────────────────────────────
+# As "prateleiras" do blog. UMA por post, declarada no frontmatter
+# como `categories: [Nome]`. Dirigem o menu e as páginas de seção.
+# A fiação da navbar lendo isto é tarefa do Sprint C.
+categorias:
+  - nome: Tecnologia
+    slug: tecnologia
+  - nome: Política
+    slug: politica
+  - nome: História
+    slug: historia
+  - nome: Economia
+    slug: economia
+  - nome: Outros
+    slug: outros
+
+# ── páginas fixas ───────────────────────────────────────────
+# Links do menu que não são categoria.
+paginas:
+  - nome: Início
+    url: /
+  - nome: Posts
+    url: /posts/
+  - nome: Livros
+    url: /livros/
+  - nome: Sobre
+    url: /about/
