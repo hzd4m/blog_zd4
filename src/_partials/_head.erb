@@ -1,5 +1,18 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<%# Tema inicial aplicado antes da pintura, pra não piscar (no-flash).
+    Usa a escolha salva; na ausência dela, segue o tema do sistema. %>
+<script>
+  (function () {
+    try {
+      var salvo = localStorage.getItem("tema");
+      var tema = salvo || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", tema);
+    } catch (e) {}
+  })();
+</script>
+
 <% resource_title = strip_html(strip_newlines(title)) %>
 <title><% if resource_title != "Index" %><%= resource_title %> | <%= metadata.title %><% else %><%= metadata.title %>: <%= metadata.tagline %><% end %></title>
 

@@ -1,8 +1,6 @@
-@import "livros.css";
-
 /* ============================================================================
    Blog do Zd4 — Sistema visual
-   Playbook: fusão Editorial + Marca + Experiência (ver aulas_blog_zd4/design/)
+   Playbook: fusão Editorial + Marca + Experiência 
    Base: Source Serif 4 (leitura) · Space Grotesk (títulos/marca) · JetBrains Mono
    Cor signature: Âmbar terminal #FF6B1A · Fundo: creme #FBF9F4
    ============================================================================ */
@@ -61,6 +59,29 @@
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 
   --num-oldstyle: oldstyle-nums proportional-nums;
+
+  color-scheme: light;
+}
+
+/* ----------------------------------------------------------------------------
+   1b. MODO ESCURO — fundo preto, acento verde terminal (substitui o âmbar).
+   Ativado por [data-theme="dark"] no <html> (botão + script no-flash no head).
+   Contrastes mirando WCAG AA: texto ~14:1, secundário ~7:1, acento ~10:1.
+   ---------------------------------------------------------------------------- */
+:root[data-theme="dark"] {
+  --color-ink: #ecebe5;          /* texto principal — quase branco, sem ofuscar */
+  --color-paper: #0a0a0a;        /* fundo preto */
+  --color-graphite: #9c9c93;     /* secundário, datas, legendas */
+  --color-rule: #262624;         /* linhas, bordas finas */
+  --color-card: #161614;         /* cartões — leve relevo sobre o preto */
+
+  /* O "âmbar" da marca vira verde no escuro (todos os usos seguem o token) */
+  --color-amber: #3ddc84;        /* acento verde — fósforo de terminal */
+  --color-amber-soft: #3ddc8424; /* verde ~14% — fundos sutis (código inline) */
+
+  --shadow-lift: 0 8px 30px rgba(0, 0, 0, 0.5);
+
+  color-scheme: dark;
 }
 
 /* ----------------------------------------------------------------------------
@@ -87,6 +108,31 @@ body > header {
   max-width: var(--measure);
   margin: var(--space-lg) auto var(--space-sm);
   padding: 0 var(--space-md);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+/* Botão de alternância de tema — discreto, à direita da marca */
+.tema-toggle {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--step-0);
+  line-height: 1;
+  background: none;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  color: var(--color-graphite);
+  padding: 0.4rem 0.55rem;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease),
+              border-color var(--dur-fast) var(--ease);
+}
+
+.tema-toggle:hover {
+  color: var(--color-ink);
+  border-color: var(--color-amber);
 }
 
 .marca {
